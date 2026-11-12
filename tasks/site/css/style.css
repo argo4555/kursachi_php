@@ -1,0 +1,281 @@
+/* Оформление «Умпа-Лумпа» поверх Bootstrap */
+:root {
+    --side: #1f2247;       /* боковое меню */
+    --accent: #5b4fd6;     /* главный цвет: кнопки, ссылки */
+    --accent-dark: #483cc0;
+    --bg: #f3f4fa;         /* фон страниц */
+    --line: #e4e6f0;
+}
+
+body {
+    background: var(--bg);
+    color: #1f2140;
+}
+
+a {
+    color: var(--accent);
+}
+
+.btn-primary {
+    --bs-btn-bg: var(--accent);
+    --bs-btn-border-color: var(--accent);
+    --bs-btn-hover-bg: var(--accent-dark);
+    --bs-btn-hover-border-color: var(--accent-dark);
+    --bs-btn-active-bg: var(--accent-dark);
+}
+
+.btn-outline-primary {
+    --bs-btn-color: var(--accent);
+    --bs-btn-border-color: var(--accent);
+    --bs-btn-hover-bg: var(--accent);
+    --bs-btn-hover-border-color: var(--accent);
+}
+
+.btn-check:checked + .btn-outline-secondary {
+    background: var(--side);
+    border-color: var(--side);
+}
+
+/* Каркас: боковое меню слева, содержимое справа */
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.content {
+    flex: 1;
+    min-width: 0;
+    padding: 28px 32px;
+}
+
+.sidebar.offcanvas-lg {
+    background: var(--side) !important;
+    color: #fff;
+    width: 250px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 22px 16px;
+}
+
+@media (min-width: 992px) {
+    .sidebar.offcanvas-lg {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+    }
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.1;
+}
+
+.brand small {
+    display: block;
+    font-weight: 400;
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+.logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+}
+
+.side-nav {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.side-nav a {
+    display: flex;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+}
+
+.side-nav a span {
+    width: 18px;
+    text-align: center;
+}
+
+.side-nav a:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+}
+
+.side-nav a.active {
+    background: var(--accent);
+    color: #fff;
+}
+
+.side-user {
+    margin-top: auto;
+    padding: 14px 12px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.side-user small {
+    display: block;
+    opacity: 0.7;
+}
+
+.topbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+/* Карточки и панели */
+.panel,
+.stat {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 20px;
+}
+
+.stat span {
+    display: block;
+    color: #6b6f8a;
+    font-size: 14px;
+}
+
+.stat b {
+    font-size: 30px;
+}
+
+.stat-work { border-left: 5px solid #f5a524; }
+.stat-overdue { border-left: 5px solid #e5484d; }
+.stat-done { border-left: 5px solid #2f9e5b; }
+
+.task-table thead th {
+    background: #f7f7fc;
+    color: #6b6f8a;
+    font-weight: 600;
+    font-size: 14px;
+    border-bottom: 1px solid var(--line);
+}
+
+.task-table td,
+.task-table th {
+    padding: 12px 14px;
+}
+
+.task-link {
+    font-weight: 600;
+    color: #1f2140;
+    text-decoration: none;
+}
+
+.task-link:hover {
+    color: var(--accent);
+}
+
+/* Цветная метка статуса: жёлтый — в работе, зелёный — выполнено, красный — просрочено */
+.badge-st {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.st-work { background: #fff4d6; color: #a16207; }
+.st-done { background: #e3f6ea; color: #1f7a43; }
+.st-overdue { background: #fde4e4; color: #c62828; }
+.st-fail { background: #ececf1; color: #4b4f66; }
+.st-cancel { background: #f3f3f6; color: #9a9db0; }
+
+/* Точка приоритета: красная — высокий, жёлтая — средний, синяя — низкий */
+.prio {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.prio-0 { background: #e5484d; }
+.prio-1 { background: #f5a524; }
+.prio-2 { background: #3b82f6; }
+
+/* Главная: ближайшие сроки */
+.near-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 6px;
+    border-top: 1px solid var(--line);
+    color: inherit;
+    text-decoration: none;
+}
+
+.near-row:hover {
+    background: #f7f7fc;
+}
+
+/* Карточка задачи */
+.description {
+    white-space: normal;
+    line-height: 1.6;
+}
+
+.task-info dt {
+    color: #6b6f8a;
+    font-weight: 400;
+    font-size: 13px;
+}
+
+.task-info dd {
+    margin-bottom: 12px;
+}
+
+.progress-bar {
+    background: var(--accent);
+}
+
+/* Вход */
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--side) 0%, #3a2f8f 100%);
+}
+
+.login-card {
+    width: 380px;
+    background: #fff;
+    border-radius: 18px;
+    padding: 32px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+.brand.dark {
+    color: #1f2140;
+}
+
+/* Печать отчёта без меню и кнопок */
+@media print {
+    .sidebar, .filters, .topbar { display: none !important; }
+    .content { padding: 0; }
+}

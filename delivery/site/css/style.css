@@ -1,0 +1,47 @@
+/* Цвета службы доставки «ЕдаРядом» поверх Bootstrap */
+body {
+    background: #f6f8f7;
+}
+
+.app-navbar {
+    background: #1f4e3d;
+}
+
+.btn-primary {
+    background: #f28c28;
+    border-color: #f28c28;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background: #d9741a;
+    border-color: #d9741a;
+}
+
+.table {
+    background: #fff;
+    font-size: 15px;
+}
+
+.table td,
+.table th {
+    vertical-align: middle;
+}
+
+.login-box {
+    max-width: 360px;
+    margin: 90px auto;
+}
+
+.small-muted {
+    color: #6c757d;
+    font-size: 13px;
+}
+
+/* Цвет статуса заказа (.table впереди, чтобы перебить цвет ячеек Bootstrap) */
+.table .status { font-weight: 600; }
+.table .status-new { color: #0d6efd; }
+.table .status-cooking { color: #d9741a; }
+.table .status-way { color: #6f42c1; }
+.table .status-done { color: #198754; }
+.table .status-cancel { color: #dc3545; }

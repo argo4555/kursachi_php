@@ -1,0 +1,304 @@
+/* Оформление приюта «Лапа помощи» поверх Bootstrap */
+:root {
+    --teal: #0f5c58;        /* меню навигации, второстепенные кнопки */
+    --teal-dark: #0b4744;
+    --coral: #ef6f53;       /* главные действия */
+    --coral-dark: #d9583c;
+    --bg: #f7f4ee;          /* тёплый фон страниц */
+    --line: #ebe5da;
+}
+
+body {
+    background: var(--bg);
+    color: #23302f;
+}
+
+a {
+    color: var(--teal);
+}
+
+.text-teal {
+    color: var(--teal);
+}
+
+/* Меню */
+.app-navbar {
+    background: var(--teal);
+}
+
+.app-navbar .nav-link.active {
+    color: #fff;
+    font-weight: 600;
+    border-bottom: 2px solid var(--coral);
+}
+
+.paw {
+    display: inline-block;
+    background: var(--coral);
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.user-info small {
+    display: block;
+    font-size: 12px;
+    line-height: 1;
+    color: #ffc9bc;
+}
+
+/* Кнопки */
+.btn-accent {
+    background: var(--coral);
+    border-color: var(--coral);
+    color: #fff;
+}
+
+.btn-accent:hover,
+.btn-accent:focus {
+    background: var(--coral-dark);
+    border-color: var(--coral-dark);
+    color: #fff;
+}
+
+.btn-teal {
+    background: var(--teal);
+    border-color: var(--teal);
+    color: #fff;
+}
+
+.btn-teal:hover {
+    background: var(--teal-dark);
+    color: #fff;
+}
+
+.btn-check:checked + .btn-outline-secondary {
+    background: var(--teal);
+    border-color: var(--teal);
+}
+
+/* Панели и карточки итогов */
+.panel,
+.stat {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 18px 20px;
+}
+
+.stat span {
+    display: block;
+    color: #7a8584;
+    font-size: 14px;
+}
+
+.stat b {
+    font-size: 30px;
+}
+
+.stat-quar { border-top: 4px solid #e9a23b; }
+.stat-treat { border-top: 4px solid #e35d6a; }
+.stat-adopted { border-top: 4px solid var(--teal); }
+
+/* Сетка карточек животных */
+.pet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+}
+
+.pet-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.pet-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(15, 92, 88, 0.12);
+}
+
+.pet-photo {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+}
+
+.pet-photo.big {
+    height: 160px;
+    border-radius: 14px;
+    font-size: 90px;
+}
+
+.pet-0 { background: #fde8d7; }   /* собаки */
+.pet-1 { background: #dcefed; }   /* кошки */
+.pet-2 { background: #ece6f7; }   /* другие */
+
+.pet-body {
+    padding: 14px 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.pet-body h5 {
+    margin: 0 0 4px;
+    font-weight: 700;
+}
+
+.pet-meta {
+    color: #6d7877;
+    font-size: 14px;
+}
+
+.pet-foot {
+    margin-top: auto;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--teal);
+    font-weight: 600;
+}
+
+/* Метки статуса */
+.badge-st {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.st-home { background: #dcefed; color: #0f5c58; }
+.st-quar { background: #fdf0d8; color: #9a5b00; }
+.st-treat { background: #fde2e4; color: #b42335; }
+.st-adopted { background: #e6e3fb; color: #4b3fb8; }
+
+/* Карточка животного */
+.pet-info dt {
+    color: #7a8584;
+    font-weight: 400;
+    font-size: 13px;
+}
+
+.pet-info dd {
+    margin-bottom: 10px;
+}
+
+.tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin: 2px 2px 0 0;
+}
+
+.tag-yes { background: #dcefed; color: #0f5c58; }
+.tag-no { background: #f3f0ea; color: #8a8f8e; }
+
+.adopted-box {
+    background: #f1effd;
+    border-color: #d9d4fa;
+}
+
+.record {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-top: 1px solid var(--line);
+}
+
+.record-type {
+    width: 110px;
+    flex-shrink: 0;
+    text-align: center;
+    padding: 3px 0;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.rt-0 { background: #eef1f1; color: #4f5b5a; }   /* осмотр */
+.rt-1 { background: #dcefed; color: #0f5c58; }   /* вакцинация */
+.rt-2 { background: #fde2e4; color: #b42335; }   /* лечение */
+.rt-3 { background: #e6e3fb; color: #4b3fb8; }   /* стерилизация */
+
+/* Таблицы */
+.app-table thead th {
+    background: #f4f1ea;
+    color: #6d7877;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.app-table td,
+.app-table th {
+    padding: 12px 14px;
+}
+
+/* Отчёт: полосы */
+.bar-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.bar-label {
+    width: 110px;
+    color: #6d7877;
+}
+
+.bar-track {
+    flex: 1;
+    background: #f1ede6;
+    border-radius: 6px;
+    height: 20px;
+}
+
+.bar {
+    height: 100%;
+    background: var(--teal);
+    border-radius: 6px;
+}
+
+/* Вход */
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 20% 20%, #1d7d77 0%, var(--teal) 45%, #093b39 100%);
+}
+
+.login-card {
+    width: 380px;
+    background: #fff;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.login-pets {
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 8px;
+}
+
+@media print {
+    .app-navbar, .no-print { display: none !important; }
+}

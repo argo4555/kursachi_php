@@ -1,0 +1,98 @@
+ЧЕТЫРЕ PHP-КУРСОВЫХ НА RAILWAY — ПОШАГОВО
+
+Репозиторий: https://github.com/argo4555/kursachi_php
+
+Как будет выглядеть проект на Railway (рядом с кинотеатром Postgres + kursovaya):
+
+   MySQL      — одна общая база данных, внутри 4 отдельные базы (delivery, coffee, task_manager, shelter)
+   delivery   — ЕдаРядом (доставка еды)          → свой адрес  https://...up.railway.app
+   coffee     — Кофейня «Зерно» (продажи)         → свой адрес
+   tasks      — Умпа-Лумпа (задачи команды)       → свой адрес
+   shelter    — Лапа помощи (приют)               → свой адрес
+
+Все четыре сервиса берутся из одного репозитория, каждый из своей папки (Root Directory).
+Базы с тестовыми данными создаются САМИ при первом запуске. Ноутбук не нужен.
+
+
+=== ШАГ 1. База MySQL (один раз) ===
+
+1) railway.com → свой проект → «+ Create» → Database → MySQL.
+2) Дождаться зелёного Online.
+
+
+=== ШАГ 2. Сервис для ОДНОГО проекта (повторить 4 раза: delivery, coffee, tasks, shelter) ===
+
+1) «+ Create» → GitHub Repo → kursachi_php.
+   Если репозитория нет в списке: «Configure GitHub App» → дать доступ к kursachi_php.
+
+2) Сразу нажать на появившуюся карточку → Settings:
+   • Source → Root Directory:  /delivery      (для других — /coffee, /tasks, /shelter)
+   • вверху карточки можно переименовать сервис в delivery (нажать на название).
+
+3) Variables → добавить ЧЕТЫРЕ переменные (печатать ${{ и выбирать из подсказки):
+
+   MYSQLHOST       =  ${{MySQL.MYSQLHOST}}
+   MYSQLPORT       =  ${{MySQL.MYSQLPORT}}
+   MYSQLUSER       =  ${{MySQL.MYSQLUSER}}
+   MYSQLPASSWORD   =  ${{MySQL.MYSQLPASSWORD}}
+
+   Подсказка: на вкладке Variables есть «Raw Editor» — можно вставить все четыре строки разом:
+   MYSQLHOST=${{MySQL.MYSQLHOST}}
+   MYSQLPORT=${{MySQL.MYSQLPORT}}
+   MYSQLUSER=${{MySQL.MYSQLUSER}}
+   MYSQLPASSWORD=${{MySQL.MYSQLPASSWORD}}
+
+4) Вверху нажать Deploy / Apply changes.
+
+5) Settings → Networking → Generate Domain. Если спросит порт — 8080.
+   Появится свой адрес для этого проекта.
+
+Первая сборка до указания Root Directory может упасть («Dockerfile не найден») — это нормально,
+после шагов 2–4 Railway пересоберёт сервис из нужной папки.
+
+
+=== ПРОВЕРКА ===
+
+Карточка сервиса → Deployments → последний → Deploy Logs. Должно быть, например:
+   init: база coffee создана из coffee.sql
+При следующих перезапусках: «init: база coffee уже есть, пропускаем» — данные не теряются.
+
+Логины:
+   delivery  — admin / 1234,  operator / 1111
+   coffee    — admin / 1234,  barista / 1111
+   tasks     — admin / 12345, secretary, worker1, call1 … / 1111
+   shelter   — admin / 1234,  vet / 1111, volunteer / 1111
+
+
+=== ВЕРНУТЬ ТЕСТОВЫЕ ДАННЫЕ ОДНОГО ПРОЕКТА (например, перед защитой) ===
+
+1) Сервис проекта → Variables → New Variable:  RESET_DB = 1  → Deploy.
+2) После запуска (в логах «база ... создана») ОБЯЗАТЕЛЬНО удалить RESET_DB и снова Deploy,
+   иначе данные будут сбрасываться при каждом перезапуске.
+Остальные проекты это не затрагивает — у каждого своя база.
+
+
+=== ЕСЛИ ЧТО-ТО НЕ ТАК ===
+
+• Сборка падает: «failed to read dockerfile» / «Dockerfile not found»
+    — не указан Root Directory (Settings → Source).
+• В логах «MySQL ещё не готов ... getaddrinfo» или «нет подключения к MySQL»
+    — переменные не заданы в карточке проекта или не нажат Deploy.
+• «Application failed to respond» на сайте
+    — Settings → Networking → у домена поставить порт 8080.
+
+Деньги: пробный лимит Railway общий на проект (вверху «30 days or $5 left»).
+Пять дополнительных сервисов расходуют его быстрее — следите за остатком.
+Если лимит кончается, ненужные сервисы можно временно удалить и потом создать заново.
+
+
+=== ЧТО В РЕПОЗИТОРИИ ===
+
+  delivery\, coffee\, tasks\, shelter\ — по папке на проект, в каждой:
+      Dockerfile — рецепт для Railway: PHP 8.3 + Apache + драйвер MySQL
+      start.sh   — запуск: Apache слушает порт Railway, создание базы, запуск сайта
+      init.php   — создаёт базу из папки sql, если её ещё нет (RESET_DB=1 — пересоздать)
+      site\      — сам сайт; от оригинала отличается только db.php:
+                   адрес, логин и пароль базы берутся из переменных Railway
+      sql\       — SQL-скрипт базы
+Оригиналы работ в «Рабочий стол\Курсачи» не изменены.
